@@ -8,9 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan
-public class GiflibApplication {
+public class GifLibApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GiflibApplication.class, args);
+		SpringApplication.run(GifLibApplication.class, args);
 	}
 }
