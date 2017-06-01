@@ -15,6 +15,7 @@ public class Category {
     private String name;
     @Column
     private String colorCode;
+
     @OneToMany (mappedBy = "category")
     private List<Gif> gifs = new ArrayList<>();
 

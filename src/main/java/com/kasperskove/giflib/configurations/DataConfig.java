@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 public class DataConfig {
 
     @Autowired
-    private Environment env;
+    private Environment environment;
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
@@ -25,7 +25,7 @@ public class DataConfig {
         Resource config = new ClassPathResource("hibernate.cfg.xml");
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setConfigLocation(config);
-        sessionFactoryBean.setPackagesToScan(env.getProperty("giflib.entity.package"));
+        sessionFactoryBean.setPackagesToScan(environment.getProperty("giflib.entity.package"));
         sessionFactoryBean.setDataSource(dataSource());
         return sessionFactoryBean;
     }
@@ -34,10 +34,10 @@ public class DataConfig {
     public DataSource dataSource() {
 
         BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(env.getProperty("giflib.dv.driver"));
-        ds.setUrl(env.getProperty("giflib.db.url"));
-        ds.setUsername(env.getProperty("giflib.db.username"));
-        ds.setPassword(env.getProperty("giflib.db.password"));
+        ds.setDriverClassName(environment.getProperty("giflib.dv.driver"));
+        ds.setUrl(environment.getProperty("giflib.db.url"));
+        ds.setUsername(environment.getProperty("giflib.db.username"));
+        ds.setPassword(environment.getProperty("giflib.db.password"));
         return ds;
     }
 }

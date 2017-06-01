@@ -1,4 +1,4 @@
-package com.kasperskove.giflib.services;
+package com.kasperskove.giflib.web;
 
 public enum Color {
     AQUA("Aqua","#59b3b3"),
