@@ -1,4 +1,4 @@
-package com.kasperskove.giflib.configurations;
+package com.kasperskove.giflib.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

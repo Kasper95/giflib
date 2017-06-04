@@ -1,7 +1,7 @@
-package com.kasperskove.giflib.services;
+package com.kasperskove.giflib.service;
 
 import com.kasperskove.giflib.dao.CategoryDao;
-import com.kasperskove.giflib.entities.Category;
+import com.kasperskove.giflib.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-
     @Autowired
     private CategoryDao categoryDao;
 
@@ -19,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findById(long id) {
-        return null;
+    public Category findById(Long id) {
+        return categoryDao.findById(id);
     }
 
     @Override
@@ -30,6 +29,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void delete(Category category) {
-
+        categoryDao.delete(category);
     }
 }

@@ -1,4 +1,4 @@
-package com.kasperskove.giflib.configurations;
+package com.kasperskove.giflib.config;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,31 +13,35 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("application.properties")
+@PropertySource("app.properties")
 public class DataConfig {
-
     @Autowired
-    private Environment environment;
+    private Environment env;
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
-
         Resource config = new ClassPathResource("hibernate.cfg.xml");
-        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-        sessionFactoryBean.setConfigLocation(config);
-        sessionFactoryBean.setPackagesToScan(environment.getProperty("giflib.entity.package"));
-        sessionFactoryBean.setDataSource(dataSource());
-        return sessionFactoryBean;
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setConfigLocation(config);
+        sessionFactory.setPackagesToScan(env.getProperty("giflib.entity.package"));
+        sessionFactory.setDataSource(dataSource());
+        return sessionFactory;
     }
 
     @Bean
     public DataSource dataSource() {
-
         BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(environment.getProperty("giflib.dv.driver"));
-        ds.setUrl(environment.getProperty("giflib.db.url"));
-        ds.setUsername(environment.getProperty("giflib.db.username"));
-        ds.setPassword(environment.getProperty("giflib.db.password"));
+
+        // Driver class name
+        ds.setDriverClassName(env.getProperty("giflib.db.driver"));
+
+        // Set URL
+        ds.setUrl(env.getProperty("giflib.db.url"));
+
+        // Set username & password
+        ds.setUsername(env.getProperty("giflib.db.username"));
+        ds.setPassword(env.getProperty("giflib.db.password"));
+
         return ds;
     }
 }

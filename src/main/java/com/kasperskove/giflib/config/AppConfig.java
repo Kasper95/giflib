@@ -1,4 +1,4 @@
-package com.kasperskove.giflib.configurations;
+package com.kasperskove.giflib.config;
 
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.core.env.Environment;
 
 
 @Configuration
-@PropertySource("application.properties")
+@PropertySource("app.properties")
 public class AppConfig {
     @Autowired
     private Environment env;

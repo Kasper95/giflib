@@ -1,4 +1,4 @@
-package com.kasperskove.giflib.entities;
+package com.kasperskove.giflib.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
