@@ -45,10 +45,14 @@ public class CategoryController {
     // Form for adding a new category
     @RequestMapping("categories/add")
     public String formNewCategory(Model model) {
+
         // Add model attributes needed for new form
+
+        // If redirected with Category object present, do not make new Category obj
         if(!model.containsAttribute("category")) {
             model.addAttribute("category",new Category());
         }
+
         model.addAttribute("colors", Color.values());
         model.addAttribute("action","/categories");
         model.addAttribute("heading","New Category");
@@ -98,10 +102,12 @@ public class CategoryController {
     // Add a category
     @RequestMapping(value = "/categories", method = RequestMethod.POST)
     public String addCategory(@Valid Category category, BindingResult result, RedirectAttributes redirectAttributes) {
-        // TODO: Add category if valid data was received
+
+        // Add category if valid data was received
         if(result.hasErrors()) {
+
             // Include validation errors upon redirect
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.category",result);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.category", result);
 
             // Add  category if invalid was received
             redirectAttributes.addFlashAttribute("category",category);
@@ -112,7 +118,7 @@ public class CategoryController {
 
         categoryService.save(category);
 
-        redirectAttributes.addFlashAttribute("flash",new FlashMessage("Category successfully added!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Category successfully added!", FlashMessage.Status.SUCCESS));
 
         // Redirect browser to /categories
         return "redirect:/categories";

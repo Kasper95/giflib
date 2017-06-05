@@ -78,11 +78,11 @@ public class GifController {
     // Form for uploading a new GIF
     @RequestMapping("/upload")
     public String formNewGif(Model model) {
-        // TODO: Add model attributes needed for new GIF upload form
+        // Add model attributes needed for new GIF upload form
         if(!model.containsAttribute("gif")) {
-            model.addAttribute("gif",new Gif());
+            model.addAttribute("gif", new Gif());
         }
-        model.addAttribute("categories",categoryService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("action","/gifs");
         model.addAttribute("heading","Upload");
         model.addAttribute("submit","Add");

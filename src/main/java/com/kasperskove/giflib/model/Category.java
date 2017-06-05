@@ -13,6 +13,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // ensures name is no blank and between 3-12 chars
     @NotNull
     @Size(min = 3, max = 12)
     private String name;

@@ -1,6 +1,7 @@
 package com.kasperskove.giflib.web;
 
 public class FlashMessage {
+
     private String message;
     private Status status;
 
