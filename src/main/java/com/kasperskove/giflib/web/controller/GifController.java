@@ -26,7 +26,7 @@ public class GifController {
     // Home page - index of all GIFs
     @RequestMapping("/")
     public String listGifs(Model model) {
-        // TODO: Get all gifs
+        // Get all gifs
         List<Gif> gifs = gifService.findAll();
 
         model.addAttribute("gifs", gifs);
@@ -36,7 +36,7 @@ public class GifController {
     // Single GIF page
     @RequestMapping("/gifs/{gifId}")
     public String gifDetails(@PathVariable Long gifId, Model model) {
-        // TODO: Get gif whose id is gifId
+        // Get gif whose id is gifId
         Gif gif = gifService.findById(gifId);
 
         model.addAttribute("gif", gif);
@@ -47,14 +47,14 @@ public class GifController {
     @RequestMapping("/gifs/{gifId}.gif")
     @ResponseBody
     public byte[] gifImage(@PathVariable Long gifId) {
-        // TODO: Return image data as byte array of the GIF whose id is gifId
+        // Return image data as byte array of the GIF whose id is gifId
         return gifService.findById(gifId).getBytes();
     }
 
     // Favorites - index of all GIFs marked favorite
     @RequestMapping("/favorites")
     public String favorites(Model model) {
-        // TODO: Get list of all GIFs marked as favorite
+        // Get list of all GIFs marked as favorite
         List<Gif> faves = new ArrayList<>();
 
         model.addAttribute("gifs",faves);
@@ -64,15 +64,15 @@ public class GifController {
 
     // Upload a new GIF
     @RequestMapping(value = "/gifs", method = RequestMethod.POST)
-    public String addGif(Gif gif, @RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
-        // TODO: Upload new GIF if data is valid
-        gifService.save(gif,file);
+    public String addGif(Gif gif, @RequestParam(name = "file") MultipartFile file, RedirectAttributes redirectAttributes) {
+        // Upload new GIF if data is valid
+        gifService.save(gif, file);
 
         // Add flash message for success
         redirectAttributes.addFlashAttribute("flash",new FlashMessage("GIF successfully uploaded!", FlashMessage.Status.SUCCESS));
 
-        // TODO: Redirect browser to new GIF's detail view
-        return String.format("redirect:/gifs/%s",gif.getId());
+        // Redirect browser to new GIF's detail view
+        return String.format("redirect:/gifs/%s", gif.getId());
     }
 
     // Form for uploading a new GIF
@@ -98,7 +98,7 @@ public class GifController {
             model.addAttribute("gif",gifService.findById(gifId));
         }
         model.addAttribute("categories",categoryService.findAll());
-        model.addAttribute("action",String.format("/gifs/%s",gifId));
+        model.addAttribute("action",String.format("/gifs/%s", gifId));
         model.addAttribute("heading","Edit GIF");
         model.addAttribute("submit","Update");
 
@@ -108,14 +108,14 @@ public class GifController {
     // Update an existing GIF
     @RequestMapping(value = "/gifs/{gifId}", method = RequestMethod.POST)
     public String updateGif(Gif gif, @RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
-        // TODO: Update GIF if data is valid
-        gifService.save(gif,file);
+        // Update GIF if data is valid
+        gifService.save(gif, file);
 
         // Flash message
-        redirectAttributes.addFlashAttribute("flash",new FlashMessage("GIF successfully updated!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("GIF successfully updated!", FlashMessage.Status.SUCCESS));
 
         // Redirect browser to updated GIF's detail view
-        return String.format("redirect:/gifs/%s",gif.getId());
+        return String.format("redirect:/gifs/%s", gif.getId());
     }
 
     // Delete an existing GIF
@@ -124,7 +124,7 @@ public class GifController {
         // TODO: Delete the GIF whose id is gifId
         Gif gif = gifService.findById(gifId);
         gifService.delete(gif);
-        redirectAttributes.addFlashAttribute("flash",new FlashMessage("GIF deleted!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("GIF deleted!", FlashMessage.Status.SUCCESS));
 
         // TODO: Redirect to app root
         return "redirect:/";
@@ -138,7 +138,7 @@ public class GifController {
         gifService.toggleFavorite(gif);
 
         // TODO: Redirect to GIF's detail view
-        return String.format("redirect:%s",request.getHeader("referer"));
+        return String.format("redirect:%s", request.getHeader("referer"));
     }
 
     // Search results
@@ -147,7 +147,7 @@ public class GifController {
         // TODO: Get list of GIFs whose description contains value specified by q
         List<Gif> gifs = new ArrayList<>();
 
-        model.addAttribute("gifs",gifs);
+        model.addAttribute("gifs", gifs);
         return "gif/index";
     }
 }

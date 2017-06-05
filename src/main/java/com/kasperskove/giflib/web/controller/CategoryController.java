@@ -35,8 +35,8 @@ public class CategoryController {
     // Single category page
     @RequestMapping("/categories/{categoryId}")
     public String category(@PathVariable Long categoryId, Model model) {
-        // TODO: Get the category given by categoryId
-        Category category = null;
+        // Get the category given by categoryId
+        Category category = categoryService.findById(categoryId);
 
         model.addAttribute("category", category);
         return "category/details";
@@ -79,7 +79,7 @@ public class CategoryController {
     // Update an existing category
     @RequestMapping(value = "/categories/{categoryId}", method = RequestMethod.POST)
     public String updateCategory(@Valid Category category, BindingResult result, RedirectAttributes redirectAttributes) {
-        // TODO: Update category if valid data was received
+        // Update category if valid data was received
         if(result.hasErrors()) {
             // Include validation errors upon redirect
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.category",result);
@@ -95,7 +95,7 @@ public class CategoryController {
 
         redirectAttributes.addFlashAttribute("flash",new FlashMessage("Category successfully updated!", FlashMessage.Status.SUCCESS));
 
-        // TODO: Redirect browser to /categories
+        // Redirect browser to /categories
         return "redirect:/categories";
     }
 

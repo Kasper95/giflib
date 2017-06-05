@@ -20,9 +20,6 @@ public class GifDaoImpl implements GifDao {
     public List<Gif> findAll() {
         Session session = sessionFactory.openSession();
 
-        // DEPRECATED as of Hibernate 5.2.0
-        // List<Gif> gifs = session.createCriteria(Gif.class).list();
-
         // Create CriteriaBuilder
         CriteriaBuilder builder = session.getCriteriaBuilder();
 
@@ -42,7 +39,7 @@ public class GifDaoImpl implements GifDao {
     @Override
     public Gif findById(Long id) {
         Session session = sessionFactory.openSession();
-        Gif gif = session.get(Gif.class,id);
+        Gif gif = session.get(Gif.class, id);
         session.close();
         return gif;
     }
